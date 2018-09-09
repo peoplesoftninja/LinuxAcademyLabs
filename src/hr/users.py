@@ -1,6 +1,7 @@
 import subprocess
 import pwd
 
+from hr import helpers
 def add(user_info):
 
     print(f"Adding user '{user_info['name']}'")
@@ -34,7 +35,7 @@ def update(user_info):
         ])
 
 
-def sync(user_info,existing_users=None):
+def sync(user_info,existing_users=helpers.user_names()):
     existing_users = (existing_users or _user_names())
     user_names = [user['name'] for user in user_info]
     for user in user_info:

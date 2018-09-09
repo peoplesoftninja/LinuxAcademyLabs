@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from hr import inventory, users
 
 def create_parser():
     parser = ArgumentParser("Argument Parser for HR Project")
@@ -8,3 +9,12 @@ def create_parser():
                 help="add json file",
                 action='store_true')
     return parser
+
+def main():
+    args = create_parser().parse_args()
+
+    if args.export:
+        inventory.dump(args.path)
+    else:
+        users_info = inventory.load(args.path)
+        users.sync(users_info)
